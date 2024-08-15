@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setup Teams</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            width: 60%;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        label, input {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .team-input {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .team-input label {
+            width: 30%;
+            text-align: left;
+        }
+        .team-input input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            align-self: center;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Setup Teams</h1>
+        <form action="{{ url_for('setup_teams') }}" method="post">
+            <label for="num_teams">Number of Teams:</label>
+            <input type="number" id="num_teams" name="num_teams" min="2" max="10" required>
+            <div id="team_names_container"></div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('num_teams').addEventListener('input', function() {
+            const numTeams = parseInt(this.value);
+            const container = document.getElementById('team_names_container');
+            container.innerHTML = '';
+            for (let i = 0; i < numTeams; i++) {
+                const teamInput = document.createElement('div');
+                teamInput.className = 'team-input';
+                const label = document.createElement('label');
+                label.innerText = `Team ${i + 1} Name:`;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'team_names';
+                input.required = true;
+                teamInput.appendChild(label);
+                teamInput.appendChild(input);
+                container.appendChild(teamInput);
+            }
+        });
+    </script>
+</body>
+</html>

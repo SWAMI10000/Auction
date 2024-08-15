@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auction Ended</title>
+</head>
+<body>
+    <h1>Auction Ended</h1>
+    <h2>Sold Players:</h2>
+    <ul>
+        {% for item in sold_players %}
+            <li>{{ item.player['Position'] }} sold to {{ item.team }} for {{ item.price }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('welcome') }}"><button>Restart Auction</button></a>
+</body>
+</html>

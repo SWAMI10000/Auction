@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Summary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            color: #333;
+        }
+        .team-column {
+            flex: 1;
+            background: #fff;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+        .team-column h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .team-column .player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .team-column .player img {
+            width: 150px;
+            height: auto;
+        }
+        .team-column .player-info {
+            flex: 1;
+            margin-left: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    {% for team, summary in team_summary.items() %}
+        <div class="team-column">
+            <h2>{{ team }}</h2>
+            <p>Players: {{ summary.players }}</p>
+            <p>Spent: &#8377;{{ summary.total_spent }} Crores</p>
+            <div class="players-list">
+                {% for player in summary.player_details %}
+                    <div class="player">
+                        <img src="{{ player['ShieldUrl'] }}" alt="Player Shield">
+                        <div class="player-info">
+                            &#8377;{{ player['Price'] }} Crores
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
